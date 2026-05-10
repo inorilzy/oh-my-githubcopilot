@@ -5,7 +5,7 @@ description: >
   Use when: security review, OWASP Top 10 analysis, secrets detection,
   input validation review, auth/authz checks, dependency security audit,
   vulnerability assessment, penetration test guidance.
-model: "Claude Opus 4.7 (copilot)"
+model: ["Claude Opus 4.7 (copilot)", "Claude Opus 4.6 (copilot)"]
 tools: [readFile, read, search, codebase, problems, runInTerminal, shell, usages]
 user-invocable: true
 ---

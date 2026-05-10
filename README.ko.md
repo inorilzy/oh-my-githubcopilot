@@ -508,6 +508,16 @@ Scope-risk: narrow
 
 ## What's New
 
+### v1.4.2 (2026-05-10) — Opus 4.7 → 4.6 Fallback 배열
+
+**Opus 4.7 라우팅을 cost-tier 안전하게 만들기 위해 `Claude Opus 4.6 (copilot)`를 인라인 fallback으로 추가했습니다.**
+
+- 7개 심층 추론 에이전트(`analyst`, `architect`, `code-reviewer`, `critic`, `omg-coordinator`, `planner`, `security-reviewer`)의 `model:`을 YAML 배열로 변경: `["Claude Opus 4.7 (copilot)", "Claude Opus 4.6 (copilot)"]`.
+- 배경: VS Code Copilot은 subagent 호출 시 현재 채팅 베이스 모델의 cost-tier 상한을 초과하면 차단합니다. 베이스가 `GPT-5.5`(7.5x)일 때 `Opus 4.7`(15x)만 지정하면 강등 없이 그대로 실패했습니다.
+- 변경 후: 세션 상한이 허용하면 Opus 4.7을 사용하고, 아니면 자동으로 Opus 4.6으로 폴백합니다.
+- GPT-5.5(15개) 및 Sonnet 4.6(6개) 라우팅은 그대로입니다.
+- VSIX: `oh-my-githubcopilot-1.4.2.vsix`.
+
 ### v1.4.1 (2026-05-09) — 역할 기반 에이전트 모델 라우팅
 
 **전체 28개 에이전트를 작업 성격에 맞는 Copilot 모델 선호값으로 재매핑**

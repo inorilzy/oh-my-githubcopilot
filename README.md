@@ -513,6 +513,16 @@ Available trailers: `Constraint`, `Rejected`, `Directive`, `Confidence`, `Scope-
 
 ## What's New
 
+### v1.4.2 (2026-05-10) — Opus 4.7 → 4.6 Fallback Array
+
+**Made Opus 4.7 routing tier-safe by adding `Claude Opus 4.6 (copilot)` as an inline fallback.**
+
+- The 7 deep-reasoning agents (`analyst`, `architect`, `code-reviewer`, `critic`, `omg-coordinator`, `planner`, `security-reviewer`) now use a YAML model array: `["Claude Opus 4.7 (copilot)", "Claude Opus 4.6 (copilot)"]`.
+- Why: VS Code Copilot blocks subagent calls that exceed the active chat model's cost-tier ceiling. With a 7.5x base model (e.g. `GPT-5.5`), an `Opus 4.7`-only request was hard-failing instead of degrading.
+- New behavior: when the session ceiling allows it, Opus 4.7 is used. Otherwise the agent transparently falls back to Opus 4.6 instead of failing.
+- No change to GPT-5.5 (15 agents) or Sonnet 4.6 (6 agents) routing.
+- VSIX: `oh-my-githubcopilot-1.4.2.vsix`.
+
 ### v1.4.1 (2026-05-09) — Role-Based Agent Model Routing
 
 **Mapped all 28 agents to task-fit Copilot model preferences using qualified model names**

@@ -4,7 +4,7 @@ description: >
   Strategic planning consultant with interview workflow.
   Use when: creating work plans, planning implementation strategy, scoping tasks,
   breaking down complex features, project planning, design planning.
-model: "Claude Opus 4.7 (copilot)"
+model: ["Claude Opus 4.7 (copilot)", "Claude Opus 4.6 (copilot)"]
 tools: [readFile, read, search, codebase, problems, runInTerminal, shell, editFiles, edit]
 agents: [explore, document-specialist, analyst]
 user-invocable: true

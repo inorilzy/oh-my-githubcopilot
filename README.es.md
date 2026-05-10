@@ -462,6 +462,16 @@ Trailers disponibles: `Constraint`, `Rejected`, `Directive`, `Confidence`, `Scop
 
 ## What's New
 
+### v1.4.2 (2026-05-10) — Arreglo de respaldo Opus 4.7 → 4.6
+
+**Enrutamiento de Opus 4.7 ahora es seguro frente al límite de cost-tier al añadir `Claude Opus 4.6 (copilot)` como respaldo en línea.**
+
+- Los 7 agentes de razonamiento profundo (`analyst`, `architect`, `code-reviewer`, `critic`, `omg-coordinator`, `planner`, `security-reviewer`) ahora usan un arreglo YAML en `model:`: `["Claude Opus 4.7 (copilot)", "Claude Opus 4.6 (copilot)"]`.
+- Motivo: VS Code Copilot bloquea las llamadas de subagentes que exceden el techo de cost-tier del modelo de chat activo. Con una base 7.5x (p. ej. `GPT-5.5`), pedir solo `Opus 4.7` (15x) fallaba en lugar de degradar.
+- Nuevo comportamiento: si el techo de la sesión lo permite, se usa Opus 4.7; de lo contrario, el agente cae transparentemente a Opus 4.6 en vez de fallar.
+- Sin cambios para GPT-5.5 (15 agentes) ni Sonnet 4.6 (6 agentes).
+- VSIX: `oh-my-githubcopilot-1.4.2.vsix`.
+
 ### v1.4.1 (2026-05-09) — Enrutamiento de modelos por rol de agente
 
 **Se remapearon los 28 agentes a preferencias de modelo Copilot adecuadas para cada tarea**

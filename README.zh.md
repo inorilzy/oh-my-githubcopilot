@@ -464,6 +464,16 @@ Scope-risk: narrow
 
 ## What's New
 
+### v1.4.2 (2026-05-10) — Opus 4.7 → 4.6 回退数组
+
+**通过将 `Claude Opus 4.6 (copilot)` 作为内联回退,使 Opus 4.7 路由对 cost-tier 安全。**
+
+- 7 个深度推理代理(`analyst`、`architect`、`code-reviewer`、`critic`、`omg-coordinator`、`planner`、`security-reviewer`)的 `model:` 改为 YAML 数组:`["Claude Opus 4.7 (copilot)", "Claude Opus 4.6 (copilot)"]`。
+- 背景:VS Code Copilot 会阻止超过当前聊天模型 cost-tier 上限的子代理调用。当基础模型为 `GPT-5.5`(7.5x)时,仅指定 `Opus 4.7`(15x)会直接失败,而不会降级。
+- 新行为:如会话上限允许则使用 Opus 4.7;否则代理会透明回退到 Opus 4.6,而不是失败。
+- GPT-5.5(15 个代理)和 Sonnet 4.6(6 个代理)的路由不变。
+- VSIX:`oh-my-githubcopilot-1.4.2.vsix`。
+
 ### v1.4.1 (2026-05-09) — 基于代理角色的模型路由
 
 **将全部 28 个代理重新映射到更适合任务类型的 Copilot 模型偏好**

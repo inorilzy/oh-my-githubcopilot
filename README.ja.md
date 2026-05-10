@@ -468,6 +468,16 @@ Scope-risk: narrow
 
 ## What's New
 
+### v1.4.2 (2026-05-10) — Opus 4.7 → 4.6 フォールバック配列
+
+**`Claude Opus 4.6 (copilot)` をインラインフォールバックとして追加し、Opus 4.7 ルーティングを cost-tier に対して安全にしました。**
+
+- 7 つの深層推論エージェント (`analyst`, `architect`, `code-reviewer`, `critic`, `omg-coordinator`, `planner`, `security-reviewer`) の `model:` を YAML 配列に変更: `["Claude Opus 4.7 (copilot)", "Claude Opus 4.6 (copilot)"]`。
+- 理由: VS Code Copilot は、サブエージェント呼び出しが現在のチャットモデルの cost-tier 上限を超える場合にブロックします。ベースが `GPT-5.5`(7.5x) のときに `Opus 4.7` (15x) のみを指定すると、降格せずそのまま失敗していました。
+- 新しい動作: セッション上限が許せば Opus 4.7 を使用し、そうでなければ失敗ではなく Opus 4.6 へ透過的にフォールバックします。
+- GPT-5.5 (15 エージェント) と Sonnet 4.6 (6 エージェント) のルーティングは変更ありません。
+- VSIX: `oh-my-githubcopilot-1.4.2.vsix`。
+
 ### v1.4.1 (2026-05-09) — エージェント役割ベースのモデルルーティング
 
 **全28エージェントをタスク適性に合わせた Copilot モデル設定へ再マッピング**
